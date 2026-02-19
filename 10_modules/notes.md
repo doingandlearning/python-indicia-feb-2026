@@ -2,9 +2,6 @@
 
 ## Why this matters
 
-Yesterday you learned **exceptions** (handling errors safely).  
-Today you learn **modules/packages** (organizing code safely).
-
 Good organization gives you:
 
 - Reusable code
@@ -12,22 +9,6 @@ Good organization gives you:
 - Easier debugging
 - Cleaner files
 - Better teamwork
-
----
-
-## Teaching Example Data (User Management)
-
-Use this data for examples in class notes:
-
-```python
-users = [
-    {"id": 1, "name": "Alice", "email": "alice@example.com", "role": "admin"},
-    {"id": 2, "name": "Bob", "email": "bob@example.com", "role": "user"},
-    {"id": 3, "name": "Charlie", "email": "charlie@example.com", "role": "user"},
-]
-```
-
-> Keep this separate from the lab’s analytics domain so examples don’t get mixed up.
 
 ---
 
