@@ -1,0 +1,152 @@
+[
+  {
+    "Title": "Wicked",
+    "Year": "2024",
+    "Director": "Jon M. Chu",
+    "Genre": "Musical"
+  },
+  {
+    "Title": "The Matrix",
+    "Year": "1999",
+    "Director": "Lana Wachowski; Lilly Wachowski",
+    "Genre": "Sci-Fi"
+  },
+  {
+    "Title": "Forrest Gump",
+    "Year": "1994",
+    "Director": "Robert Zemeckis",
+    "Genre": "Drama"
+  },
+  {
+    "Title": "Inception",
+    "Year": "2010",
+    "Director": "Christopher Nolan",
+    "Genre": "Sci-Fi"
+  },
+  {
+    "Title": "The Godfather",
+    "Year": "1972",
+    "Director": "Francis Ford Coppola",
+    "Genre": "Crime"
+  },
+  {
+    "Title": "Casablanca",
+    "Year": "1942",
+    "Director": "Michael Curtiz",
+    "Genre": "Romance"
+  },
+  {
+    "Title": "Parasite",
+    "Year": "2019",
+    "Director": "Bong Joon-ho",
+    "Genre": "Thriller"
+  },
+  {
+    "Title": "The Dark Knight",
+    "Year": "2008",
+    "Director": "Christopher Nolan",
+    "Genre": "Action"
+  },
+  {
+    "Title": "Titanic",
+    "Year": "1997",
+    "Director": "James Cameron",
+    "Genre": "Romance"
+  },
+  {
+    "Title": "Pulp Fiction",
+    "Year": "1994",
+    "Director": "Quentin Tarantino",
+    "Genre": "Crime"
+  },
+  {
+    "Title": "Gladiator",
+    "Year": "2000",
+    "Director": "Ridley Scott",
+    "Genre": "Action"
+  },
+  {
+    "Title": "Avatar",
+    "Year": "2009",
+    "Director": "James Cameron",
+    "Genre": "Sci-Fi"
+  },
+  {
+    "Title": "Everything Everywhere All at Once",
+    "Year": "2022",
+    "Director": "Daniel Kwan; Daniel Scheinert",
+    "Genre": "Sci-Fi"
+  },
+  {
+    "Title": "The Shawshank Redemption",
+    "Year": "1994",
+    "Director": "Frank Darabont",
+    "Genre": "Drama"
+  },
+  {
+    "Title": "Spider-Man: Into the Spider-Verse",
+    "Year": "2018",
+    "Director": "Bob Persichetti; Peter Ramsey; Rodney Rothman",
+    "Genre": "Animation"
+  },
+  {
+    "Title": "La La Land",
+    "Year": "2016",
+    "Director": "Damien Chazelle",
+    "Genre": "Musical"
+  },
+  {
+    "Title": "Black Panther",
+    "Year": "2018",
+    "Director": "Ryan Coogler",
+    "Genre": "Action"
+  },
+  {
+    "Title": "Oppenheimer",
+    "Year": "2023",
+    "Director": "Christopher Nolan",
+    "Genre": "Biography"
+  },
+  {
+    "Title": "The Lord of the Rings: The Fellowship of the Ring",
+    "Year": "2001",
+    "Director": "Peter Jackson",
+    "Genre": "Fantasy"
+  },
+  {
+    "Title": "Star Wars: A New Hope",
+    "Year": "1977",
+    "Director": "George Lucas",
+    "Genre": "Sci-Fi"
+  },
+  {
+    "Title": "Forest Gump",
+    "Year": "1994",
+    "Director": "Robert Zemeckis",
+    "Genre": "Drama"
+  },
+  {
+    "Title": "Nobody 2",
+    "Year": "2025",
+    "Director": "Timo Tjahjanto",
+    "Genre": "Action comedy"
+  },
+  {
+    "Title": "K-Pop Demon Hunters",
+    "Year": "2025",
+    "Director": "Maggie Kang;Chris Appelhans",
+    "Genre": "Animation"
+  },
+  {
+    "Title": "Sinners",
+    "Year": "2025",
+    "Director": "Ryan Coogler",
+    "Genre": "Horror"
+  },
+  {
+    "Title": "Speed",
+    "Year": "1994",
+    "Director": "Jan de Bont",
+    "Genre": "Action"
+  }
+]
