@@ -1,4 +1,4 @@
-# Lab 10 Cheat Sheet: Modules & Packages (Student Notes)
+# 10: Modules & Packages
 
 ## Why this matters
 
