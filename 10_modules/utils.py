@@ -14,4 +14,9 @@ class Shape:
 
 triangle = Shape("triangle")
 
-print("Hello from the utils module!")
+if __name__ == "__main__":
+  print(f"Hello from the utils module! My name is {__name__}")
+  # test code
+  shape_type = input("What type of shape do you want to make? ")
+  new_shape = Shape(shape_type)
+  print(new_shape.type)
