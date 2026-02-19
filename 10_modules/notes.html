@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lab 10 Modules Packages Cheatsheet</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; margin: 2rem auto; max-width: 900px; line-height: 1.6; padding: 0 1rem; color: #1f2937; }
+    h1,h2,h3 { line-height: 1.25; color: #111827; }
+    code { background: #f3f4f6; padding: 0.15rem 0.35rem; border-radius: 4px; }
+    pre { background: #111827; color: #f9fafb; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+    pre code { background: transparent; padding: 0; color: inherit; }
+    blockquote { border-left: 4px solid #d1d5db; margin-left: 0; padding-left: 1rem; color: #4b5563; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #e5e7eb; padding: 0.5rem; text-align: left; }
+    a { color: #2563eb; }
+    hr { border: none; border-top: 1px solid #e5e7eb; margin: 2rem 0; }
+  </style>
+</head>
+<body>
+<h1>Lab 10 Cheat Sheet: Modules &amp; Packages (Student Notes)</h1>
+<h2>Why this matters</h2>
+<p>Yesterday you learned <strong>exceptions</strong> (handling errors safely).<br />
+Today you learn <strong>modules/packages</strong> (organizing code safely).</p>
+<p>Good organization gives you:</p>
+<ul>
+<li>Reusable code</li>
+<li>Easier testing</li>
+<li>Easier debugging</li>
+<li>Cleaner files</li>
+<li>Better teamwork</li>
+</ul>
+<hr />
+<h2>Teaching Example Data (User Management)</h2>
+<p>Use this data for examples in class notes:</p>
+<pre><code class="language-python">users = [
+    {&quot;id&quot;: 1, &quot;name&quot;: &quot;Alice&quot;, &quot;email&quot;: &quot;alice@example.com&quot;, &quot;role&quot;: &quot;admin&quot;},
+    {&quot;id&quot;: 2, &quot;name&quot;: &quot;Bob&quot;, &quot;email&quot;: &quot;bob@example.com&quot;, &quot;role&quot;: &quot;user&quot;},
+    {&quot;id&quot;: 3, &quot;name&quot;: &quot;Charlie&quot;, &quot;email&quot;: &quot;charlie@example.com&quot;, &quot;role&quot;: &quot;user&quot;},
+]
+</code></pre>
+<blockquote>
+<p>Keep this separate from the lab’s analytics domain so examples don’t get mixed up.</p>
+</blockquote>
+<hr />
+<h2>1) Module Basics</h2>
+<h2>What is a module?</h2>
+<p>A <strong>module</strong> is just a single Python file (<code>.py</code>) with related code.</p>
+<p>Example module:</p>
+<pre><code class="language-python"># user_validation.py
+&quot;&quot;&quot;User validation functions.&quot;&quot;&quot;
+
+def validate_email(email):
+    return bool(email) and &quot;@&quot; in email
+
+def validate_name(name):
+    return bool(name and name.strip())
+</code></pre>
+<p>Use it:</p>
+<pre><code class="language-python">import user_validation
+
+print(user_validation.validate_email(&quot;alice@example.com&quot;))
+</code></pre>
+<h3>Rule of thumb</h3>
+<ul>
+<li>One module = one concern (validation, reporting, etc.)</li>
+</ul>
+<hr />
+<h2>2) First Module You Can Build</h2>
+<pre><code class="language-python"># user_functions.py
+&quot;&quot;&quot;User management functions.&quot;&quot;&quot;
+
+users = []
+
+def add_user(name, email, role=&quot;user&quot;):
+    user = {&quot;name&quot;: name, &quot;email&quot;: email, &quot;role&quot;: role}
+    users.append(user)
+    return user
+
+def find_user_by_email(email):
+    for user in users:
+        if user[&quot;email&quot;] == email:
+            return user
+    return None
+
+def list_users():
+    return users.copy()
+</code></pre>
+<p>Use it:</p>
+<pre><code class="language-python">import user_functions
+
+user_functions.add_user(&quot;Alice&quot;, &quot;alice@example.com&quot;, &quot;admin&quot;)
+print(user_functions.find_user_by_email(&quot;alice@example.com&quot;))
+</code></pre>
+<hr />
+<h2>3) Import Styles (Know these for lab)</h2>
+<h3>A. Import whole module (most explicit)</h3>
+<pre><code class="language-python">import user_functions
+user_functions.add_user(&quot;Alice&quot;, &quot;alice@example.com&quot;)
+</code></pre>
+<h3>B. Import specific names</h3>
+<pre><code class="language-python">from user_functions import add_user, find_user_by_email
+add_user(&quot;Alice&quot;, &quot;alice@example.com&quot;)
+</code></pre>
+<h3>C. Alias module</h3>
+<pre><code class="language-python">import user_functions as uf
+uf.add_user(&quot;Alice&quot;, &quot;alice@example.com&quot;)
+</code></pre>
+<h3>D. Alias individual names</h3>
+<pre><code class="language-python">from user_functions import add_user as add
+add(&quot;Alice&quot;, &quot;alice@example.com&quot;)
+</code></pre>
+<h3>E. Wildcard import (avoid)</h3>
+<pre><code class="language-python">from user_functions import *
+</code></pre>
+<p>Why avoid: unclear origin + name collisions.</p>
+<h3>Quick decision guide</h3>
+<ul>
+<li>Prefer <code>import module</code> for clarity and fewer conflicts.</li>
+<li>Use <code>from module import name</code> when you need only a few functions.</li>
+<li>Avoid <code>import *</code>.</li>
+</ul>
+<hr />
+<h2>4) Python Standard Library, PyPI, and pip</h2>
+<h3>Python Standard Library (built in)</h3>
+<p>These modules ship with Python, so you <strong>do not</strong> install them with pip.</p>
+<p>Official docs: https://docs.python.org/3/library/</p>
+<p>Learning tip: use the official docs to see what is available, then pair that with an LLM to ask for plain-English explanations, examples, and comparisons between similar modules.</p>
+<pre><code class="language-python">import math
+import random
+import datetime
+
+print(math.sqrt(16))
+print(random.randint(1, 10))
+print(datetime.datetime.now())
+</code></pre>
+<h3>PyPI (Python Package Index)</h3>
+<p>PyPI is the public package registry for Python packages (third-party libraries).</p>
+<ul>
+<li>Standard library = built into Python</li>
+<li>PyPI packages = installed separately</li>
+</ul>
+<h3>Install packages with <code>pip install</code></h3>
+<p>Install one package:</p>
+<pre><code class="language-bash">pip install requests
+</code></pre>
+<p>Install all required packages from file:</p>
+<pre><code class="language-bash">pip install -r requirements.txt
+</code></pre>
+<h3>Save current environment with <code>pip freeze</code></h3>
+<p>Show installed packages + versions:</p>
+<pre><code class="language-bash">pip freeze
+</code></pre>
+<p>Save to requirements file:</p>
+<pre><code class="language-bash">pip freeze &gt; requirements.txt
+</code></pre>
+<p>Tip: do installs/freezes inside your virtual environment for clean project dependencies.</p>
+<hr />
+<h2>5) Module Properties You Should Recognize</h2>
+<pre><code class="language-python">import user_functions
+
+print(user_functions.__name__)  # module name
+print(user_functions.__file__)  # file path
+print(user_functions.__doc__)   # module docstring
+print(dir(user_functions))      # all names in module
+</code></pre>
+<p>Useful exploration pattern:</p>
+<pre><code class="language-python">public = [name for name in dir(user_functions) if not name.startswith(&quot;_&quot;)]
+print(public)
+</code></pre>
+<hr />
+<h2>6) <code>if __name__ == "__main__"</code> Pattern</h2>
+<p>Use this to run test/demo code only when file runs directly.</p>
+<pre><code class="language-python">def add_user(name, email):
+    print(f&quot;Added {name}&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    print(&quot;Testing user module&quot;)
+    add_user(&quot;Test User&quot;, &quot;test@example.com&quot;)
+</code></pre>
+<h3>Behavior</h3>
+<ul>
+<li>Run file directly: block executes</li>
+<li>Import module elsewhere: block does <strong>not</strong> execute</li>
+</ul>
+<hr />
+<h2>7) Package Basics</h2>
+<h2>What is a package?</h2>
+<p>A <strong>package</strong> is a folder of modules (typically with <code>__init__.py</code>).</p>
+<p>Example structure:</p>
+<pre><code class="language-text">user_management/
+├── __init__.py
+├── user_functions.py
+├── user_validation.py
+└── user_reporting.py
+</code></pre>
+<h3>Why packages?</h3>
+<ul>
+<li>Group related modules</li>
+<li>Better project structure</li>
+<li>Easier imports and scaling</li>
+</ul>
+<hr />
+<h2>8) <code>__init__.py</code> Essentials</h2>
+<p><code>__init__.py</code> can be empty, but often exposes top-level API:</p>
+<pre><code class="language-python"># user_management/__init__.py
+from .user_functions import add_user, find_user_by_email
+from .user_validation import validate_email, validate_name
+
+__version__ = &quot;1.0.0&quot;
+
+__all__ = [
+    &quot;add_user&quot;,
+    &quot;find_user_by_email&quot;,
+    &quot;validate_email&quot;,
+    &quot;validate_name&quot;,
+]
+</code></pre>
+<p>This allows:</p>
+<pre><code class="language-python">import user_management
+user_management.add_user(&quot;Alice&quot;, &quot;alice@example.com&quot;)
+</code></pre>
+<hr />
+<h2>9) Relative vs Absolute Imports</h2>
+<p>Inside a package, prefer relative imports.</p>
+<h3>Relative (inside same package)</h3>
+<pre><code class="language-python">from .user_functions import add_user
+from .user_validation import validate_email
+</code></pre>
+<h3>Absolute</h3>
+<pre><code class="language-python">from user_management.user_functions import add_user
+</code></pre>
+<h3>Rule</h3>
+<ul>
+<li><strong>Inside package modules</strong>: relative imports are usually cleaner.</li>
+<li><strong>From outside package</strong>: absolute imports are usually clearer.</li>
+</ul>
+<hr />
+<h2>10) Common Mistakes + Fixes</h2>
+<ul>
+<li>
+<p><strong>Mistake</strong>: everything in one giant file<br />
+<strong>Fix</strong>: split by concern (validation/functions/reporting)</p>
+</li>
+<li>
+<p><strong>Mistake</strong>: <code>from module import *</code><br />
+<strong>Fix</strong>: explicit imports</p>
+</li>
+<li>
+<p><strong>Mistake</strong>: forgetting <code>__init__.py</code> in package folder<br />
+<strong>Fix</strong>: add <code>__init__.py</code></p>
+</li>
+<li>
+<p><strong>Mistake</strong>: wrong internal import path<br />
+<strong>Fix</strong>: use <code>from .module import name</code> inside package</p>
+</li>
+<li>
+<p><strong>Mistake</strong>: demo/test code runs on import<br />
+<strong>Fix</strong>: wrap in <code>if __name__ == "__main__":</code></p>
+</li>
+<li>
+<p><strong>Mistake</strong>: trying <code>pip install math</code> (or other stdlib modules)<br />
+<strong>Fix</strong>: standard library modules are built in; only install third-party packages from PyPI</p>
+</li>
+</ul>
+<hr />
+<h2>11) Organization Best Practices</h2>
+<ul>
+<li>Keep modules focused: one responsibility each.</li>
+<li>Use clear names (<code>user_validation.py</code>, not <code>stuff.py</code>).</li>
+<li>Add module docstrings.</li>
+<li>Keep public API clean in <code>__init__.py</code>.</li>
+<li>Return copies of mutable shared data when needed.</li>
+</ul>
+<hr />
+<h2>Quick Lab Checklist</h2>
+<p>Before submission, verify:</p>
+<ul>
+<li>[ ] Code is split into logical modules</li>
+<li>[ ] Package directory has <code>__init__.py</code></li>
+<li>[ ] Imports are explicit and readable</li>
+<li>[ ] Internal package imports use correct relative form</li>
+<li>[ ] No unnecessary wildcard imports</li>
+<li>[ ] Optional test/demo code is under <code>if __name__ == "__main__":</code></li>
+<li>[ ] Third-party dependencies are installed with <code>pip install -r requirements.txt</code></li>
+<li>[ ] Dependencies are captured with <code>pip freeze &gt; requirements.txt</code> when needed</li>
+</ul>
+<hr />
+<h2>60-Second Recap</h2>
+<ul>
+<li><strong>Module</strong> = one <code>.py</code> file with related code.</li>
+<li><strong>Package</strong> = directory of modules (with <code>__init__.py</code>).</li>
+<li>Python ships with a <strong>standard library</strong> (no pip install needed).</li>
+<li><strong>PyPI</strong> is where third-party libraries come from.</li>
+<li>Main import styles: <code>import module</code>, <code>from module import name</code>, aliasing.</li>
+<li>Use <code>pip install</code> to add packages and <code>pip freeze</code> to capture exact versions.</li>
+<li>Use <code>if __name__ == "__main__":</code> for direct-run code only.</li>
+<li>Use relative imports (<code>from .x import y</code>) within package modules.</li>
+<li>Good organization now saves lots of debugging time later.</li>
+</ul>
+<hr />
+<h2>Mini Q&amp;A</h2>
+<p><strong>Q: Module vs package?</strong><br />
+A: Module = file. Package = directory of modules.</p>
+<p><strong>Q: Do I need <code>__init__.py</code>?</strong><br />
+A: In this training context, yes—include it.</p>
+<p><strong>Q: Should I use <code>from x import *</code>?</strong><br />
+A: Usually no.</p>
+<p><strong>Q: Do I pip install standard library modules like <code>math</code> or <code>random</code>?</strong><br />
+A: No. Those are built into Python.</p>
+<p><strong>Q: What is <code>pip freeze</code> for?</strong><br />
+A: It outputs exact installed package versions, usually saved into <code>requirements.txt</code> for reproducible environments.</p>
+<p><strong>Q: When does <code>if __name__ == "__main__"</code> run?</strong><br />
+A: Only when that file is run directly.</p>
+</body>
+</html>
