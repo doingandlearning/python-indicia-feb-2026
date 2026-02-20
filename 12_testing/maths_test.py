@@ -33,3 +33,28 @@ def test_adding_two_negative_numbers_gives_correct_answer():
 ])
 def test_adding_various_numbers_gives_correct_answer(num1, num2, expected):
   assert add(num1, num2) == expected
+
+
+@pytest.mark.parametrize("num1, num2, expected", [
+  (0.1, 0.1, 0.2),
+  (-0.1, -0.1, -0.2),
+  (-1_000_000.4, -1_000_000.4, -2_000_000.8)
+])
+def test_adding_float_numbers_gives_correct_answer(num1, num2, expected):
+  assert pytest.approx(add(num1, num2)) == expected
+
+def test_raises_error_when_trying_to_add_two_strings():
+  with pytest.raises(TypeError):
+    add("1", "1")
+
+@pytest.mark.parametrize("arg1, arg2", [
+  ([], []),
+  ({}, {}),
+  ([], 2),
+  (2, []),
+  (True, True),
+  ((), [])
+])
+def test_raises_error_when_trying_to_add_two_non_numbers(arg1, arg2):
+  with pytest.raises(TypeError):
+    add(arg1, arg2)
