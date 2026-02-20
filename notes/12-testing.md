@@ -629,3 +629,52 @@ Testing is essential for reliable code. TDD helps you design better code by writ
 - Using `pytest.approx()` for floating-point comparisons
 
 Remember: Good tests are like documentation that never gets out of date!
+
+---
+
+## 60-Second Recap
+
+- **Testing catches bugs early** - Find issues before users do
+- **pytest is the standard** - Simple syntax, powerful features
+- **Write tests first (TDD)** - Red → Green → Refactor cycle
+- **Test files start with `test_`** - pytest auto-discovers them
+- **Use `assert` for checks** - Simple and readable
+- **Parameterize for multiple cases** - `@pytest.mark.parametrize` saves code
+- **Test exceptions with `pytest.raises()`** - Verify error handling
+- **Use `pytest.approx()` for floats** - Handles rounding errors
+- **Test both success and failure** - Cover all code paths
+- **Keep tests independent** - Each test should work alone
+
+---
+
+## Mini Q&A
+
+**Q: Why write tests first (TDD)?**  
+A: Tests document requirements, help design better interfaces, and catch bugs immediately. Red → Green → Refactor cycle ensures code works correctly.
+
+**Q: Do test files need a specific name?**  
+A: Yes - files should start with `test_` or end with `_test.py`. pytest automatically discovers and runs them.
+
+**Q: What's the difference between `assert` and `pytest.raises()`?**  
+A: `assert` checks return values. `pytest.raises()` checks that exceptions are raised correctly.
+
+**Q: When should I use `@pytest.mark.parametrize`?**  
+A: When testing the same function with multiple different inputs. It reduces code duplication and makes adding test cases easy.
+
+**Q: Why use `pytest.approx()` for floating-point comparisons?**  
+A: Floating-point arithmetic has precision limits. `pytest.approx()` handles small rounding errors that would cause tests to fail incorrectly.
+
+**Q: Should each test test one thing?**  
+A: Yes - if a test fails, you should know exactly what's wrong. One test = one behavior.
+
+**Q: Do I need to create fresh data in each test?**  
+A: Yes - tests should be independent. Create new data structures (like empty dictionaries) in each test to avoid side effects.
+
+**Q: What's the Arrange-Act-Assert pattern?**  
+A: A structure for tests: Arrange (set up), Act (execute), Assert (verify). Makes tests clear and easy to understand.
+
+**Q: Can I test functions that don't return anything?**  
+A: Yes - test side effects (like changes to a dictionary) or use `pytest.raises()` if they raise exceptions.
+
+**Q: How do I run specific tests?**  
+A: `pytest test_file.py::test_function_name` runs one test, or `pytest -k "keyword"` runs tests matching a pattern.
