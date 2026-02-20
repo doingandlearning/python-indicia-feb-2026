@@ -25,7 +25,7 @@ class Author(Base):
 
 Base.metadata.create_all(engine)
 
-# CRUD -> Create, Read, Update, Delete
+# CRUD -> Create (INSERT), Read (SELECT), Update, Delete
 def add_author(author_id, name, email, country=None):
   session = Session()
   try:
@@ -39,3 +39,43 @@ def add_author(author_id, name, email, country=None):
     return False
   finally:
     session.close()
+
+# add_author("1", "Robert Jordan", "robert@jordan.com", "USA")
+
+def get_author_by_id(author_id):
+  session = Session()
+  try:
+    author = session.query(Author).filter(Author.author_id == author_id).first()
+    return author
+  finally:
+    session.close()
+
+my_author = get_author_by_id("1")
+print(my_author)
+print(type(my_author))
+
+def get_all_authors():
+    """Get all authors."""
+    session = Session()
+    try:  # SELECT * FROM authors ORDER BY name;
+        authors = session.query(Author).order_by(Author.name).all()
+        return authors  # Returns list of Author objects
+    except Exception as e:
+        print(f"Database error: {e}")
+        return []
+    finally:
+        session.close()
+
+def search_authors_by_name(search_term):
+    """Search authors by name."""
+    session = Session()
+    try:
+        authors = session.query(Author).filter(
+            Author.name.like(f"%{search_term}%")
+        ).order_by(Author.name).all()
+        return authors
+    except Exception as e:
+        print(f"Database error: {e}")
+        return []
+    finally:
+        session.close()
