@@ -1,5 +1,5 @@
 from setup import Base
-from sqlalchemy import Column, String, DateTime
+from sqlalchemy import Column, String, DateTime, Float, Integer, Boolean
 from datetime import datetime
 
 
@@ -11,3 +11,6 @@ class Author(Base):
   email = Column(String, nullable=True, unique=True)
   country = Column(String)
   created_at = Column(DateTime, default=datetime.now)
+
+  def __repr__(self):
+    return f"<Author(author_id='{self.author_id}', name='{self.name}')>"
