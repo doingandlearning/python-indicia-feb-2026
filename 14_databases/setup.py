@@ -79,3 +79,64 @@ def search_authors_by_name(search_term):
         return []
     finally:
         session.close()
+
+def update_author(author_id, name=None, email=None, country=None):
+    """Update author information."""
+    session = Session()
+    try:
+        # Get existing author
+        author = session.query(Author).filter(
+            Author.author_id == author_id
+        ).first()
+        
+        if not author:
+            print(f"Author {author_id} not found")
+            return False
+        
+        # Update only provided fields
+        if name:
+            author.name = name
+        if email:
+            author.email = email
+        if country:
+            author.country = country
+        
+        # Commit changes
+        session.commit()
+        print(f"Author {author_id} updated successfully")
+        return True
+    except Exception as e:
+        session.rollback()
+        print(f"Database error: {e}")
+        return False
+    finally:
+        session.close()
+
+# update_author("1", country="UK")
+
+def delete_author(author_id):
+    """Delete an author."""
+    session = Session()
+    try:
+        # Get author to delete
+        author = session.query(Author).filter(
+            Author.author_id == author_id
+        ).first()
+        
+        if not author:
+            print(f"Author {author_id} not found")
+            return False
+        
+        # Delete the object
+        session.delete(author)
+        
+        # Commit deletion
+        session.commit()
+        print(f"Author {author_id} deleted successfully")
+        return True
+    except Exception as e:
+        session.rollback()
+        print(f"Database error: {e}")
+        return False
+    finally:
+        session.close()
